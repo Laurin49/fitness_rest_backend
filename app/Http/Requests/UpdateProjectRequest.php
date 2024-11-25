@@ -22,8 +22,9 @@ class UpdateProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:255',
-            'datum' => 'required|date'
+            'name' => 'sometimes|required|max:255',
+            'datum' => 'sometimes|required|date',
+            'category_id' => 'sometimes|required'
         ];
     }
 }

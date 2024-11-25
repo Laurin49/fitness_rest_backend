@@ -7,6 +7,7 @@ use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class CategoryController extends Controller
 {
@@ -15,7 +16,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = QueryBuilder::for(Category::class)
+          ->allowedIncludes('projects')
+          ->paginate();
         return new CategoryCollection($categories);
     }
 
@@ -33,7 +36,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return CategoryResource::make($category);
+        return (new CategoryResource($category))
+          ->load('projects');
     }
 
     /**

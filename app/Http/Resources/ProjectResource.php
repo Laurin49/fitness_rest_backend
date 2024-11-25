@@ -17,7 +17,8 @@ class ProjectResource extends JsonResource
         return [
           'id' => $this->id,
           'name' => $this->name,
-          'datum' => date('d.m.Y', strtotime($this->datum))
+          'datum' => date('d.m.Y', strtotime($this->datum)),
+          'category' => $this->category->name
         ];
     }
 }

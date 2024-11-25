@@ -23,7 +23,8 @@ class StoreProjectRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'datum' => 'required|date'
+            'datum' => 'required|date',
+            'category_id' => 'required'
         ];
     }
 }

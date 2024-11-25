@@ -17,7 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = QueryBuilder::for(Category::class)
-          ->allowedIncludes('projects')
+          ->allowedIncludes('projects', 'exercises')
           ->paginate();
         return new CategoryCollection($categories);
     }
@@ -37,7 +37,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         return (new CategoryResource($category))
-          ->load('projects');
+          ->load('projects', 'exercises');
     }
 
     /**
